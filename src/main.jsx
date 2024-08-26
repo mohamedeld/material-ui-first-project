@@ -10,6 +10,9 @@ import CustomSoftware from "./Pages/CustomSoftware.jsx";
 import ContactUs from "./Pages/ContactUs.jsx";
 import AboutUs from "./Pages/AboutUs.jsx";
 import Header from "./components/Header.jsx";
+import MobileDevelopment from "./Pages/MobileDevelopment.jsx";
+import WebsiteDevelopment from "./Pages/WebsiteDevelopment.jsx";
+import Revolution from "./Pages/Revolution.jsx";
 
 const Layout = () => {
   return (
@@ -50,6 +53,21 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <ContactUs />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "/web",
+        element: <WebsiteDevelopment />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "/mobile",
+        element: <MobileDevelopment />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "/revolution",
+        element: <Revolution />,
         errorElement: <ErrorPage />,
       },
     ]
