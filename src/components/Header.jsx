@@ -1,10 +1,10 @@
-
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import logo from "../assets/logo.svg";
-import { AppBar, Tab, Tabs, Toolbar, useScrollTrigger } from "@material-ui/core";
+import { AppBar, Button, Tab, Tabs, Toolbar, useScrollTrigger } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 
-import React from 'react';
 function ElevationScroll(props) {
   const { children, window } = props;
   // Note that you normally won't need to set the window ref as useScrollTrigger
@@ -28,6 +28,12 @@ const useStyles = makeStyles((theme) => ({
    ...theme.typography.tab,
     minWidth:10,
     marginLeft:'25px'
+  },
+  button:{
+    ...theme.typography.estimate,
+    borderRadius:'50px',
+    marginLeft:'50px',
+    marginRight:"25px"
   }
 }));
 
@@ -40,6 +46,11 @@ ElevationScroll.propTypes = {
   window: PropTypes.func,
 };
 const Header = () => {
+  const [value,setValue] = useState(0);
+
+  const handleChange=(e,newValue)=>{
+    setValue(newValue);
+  }
 
   function a11yProps(index) {
     return {
@@ -54,13 +65,14 @@ const Header = () => {
       <AppBar position="fixed">
       <Toolbar disableGutters>
         <img src={logo} style={{width:'20rem'}} alt="logo image" />
-        <Tabs aria-label="simple tabs example" className={classes.tabContainer}>
-    <Tab className={classes.tab} label="Home" {...a11yProps(0)} />
-    <Tab className={classes.tab} label="Services" {...a11yProps(1)} />
-    <Tab className={classes.tab} label="The Revolution" {...a11yProps(2)} />
-    <Tab className={classes.tab} label="About us" {...a11yProps(3)} />
-    <Tab className={classes.tab} label="Contact us" {...a11yProps(4)} />
+        <Tabs aria-label="simple tabs example" value={value} onChange={handleChange} className={classes.tabContainer}>
+    <Tab className={classes.tab} component={Link} to="/" label="Home" {...a11yProps(0)} />
+    <Tab className={classes.tab} component={Link} to="/services" label="Services" {...a11yProps(1)} />
+    <Tab className={classes.tab} component={Link} to="/customsoftware" label="The Revolution" {...a11yProps(2)} />
+    <Tab className={classes.tab} component={Link} to="/about" label="About us" {...a11yProps(3)} />
+    <Tab className={classes.tab} component={Link} to="contact" label="Contact us" {...a11yProps(4)} />
   </Tabs>
+  <Button variant="contained" color="secondary" className={classes.button}>Free Estimate</Button>
       </Toolbar>
         </AppBar>
         </ElevationScroll>
